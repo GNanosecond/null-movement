@@ -4,7 +4,7 @@ SendMode("Event")
 
 ; Name        : Null Strafe Movement
 ; Description : Force single strafe input only
-; Version     : v1.0.0
+; Version     : v1.0.1
 ; Author      : https://github.com/GNanosecond
 ; Repository  : https://github.com/GNanosecond/null-movement
 
@@ -22,10 +22,11 @@ keyQueue := []
 
 _targetFPS := Integer(1000 / targetPollRate)
 if (!_targetFPS) {
-	_targetFPS = 1
+	_targetFPS := 1
 }
 
-*Escape:: {
+^Escape:: {
+	send("{CTRL Down}{Escape Down}{Escape Up}{CTRL Up}")
 	ExitApp(0)
 }
 
