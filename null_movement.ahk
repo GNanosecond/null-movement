@@ -1,10 +1,10 @@
 #Requires AutoHotkey >=2.0-
 #SingleInstance Force
-SendMode("Event")
+sendMode("Event")
 
 ; Name        : Null Strafe Movement
 ; Description : Force single strafe input only
-; Version     : v1.0.1
+; Version     : v1.0.2
 ; Author      : https://github.com/GNanosecond
 ; Repository  : https://github.com/GNanosecond/null-movement
 
@@ -35,10 +35,10 @@ addKeyQueue(keyID) {
 		if (keyQueue[-1] == keyID) {
 			return
 		}
-		send("{" . keyQueue[-1] . " Up}")
+		send("{Blind}{" . keyQueue[-1] . " Up}")
 	}
 	keyQueue.Push(keyID)
-	send("{" . keyID . " Down}")
+	send("{Blind}{" . keyID . " Down}")
 }
 
 *a:: {
@@ -54,7 +54,7 @@ while (true) {
 	readjust := False
 	while (keyQueue.Length) {
 		if (GetKeyState(keyQueue[-1]) and !GetKeyState(keyQueue[-1], "P")) {
-			Send("{" . keyQueue.Pop() . " Up}")
+			send("{Blind}{" . keyQueue.Pop() . " Up}")
 			readjust := True
 			Continue
 		} else {
@@ -67,13 +67,13 @@ while (true) {
 		if (!GetKeyState(keyQueue[curKey], "P")) {
 			readjust := True
 			if (GetKeyState(keyQueue[curKey])) {
-				Send("{" . keyQueue[curKey] . " Up}")
+				send("{Blind}{" . keyQueue[curKey] . " Up}")
 			}
 			keyQueue.RemoveAt(curKey, 1)
 			Continue
 		}
 	}
 	if (readjust and keyQueue.Length) {
-		Send("{" . keyQueue[-1] . " Down}")
+		send("{Blind}{" . keyQueue[-1] . " Down}")
 	}
 }
